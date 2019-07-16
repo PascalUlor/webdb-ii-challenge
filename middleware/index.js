@@ -1,8 +1,8 @@
 const cardb = require("../data/models");
 
 async function validateCarId(req, res, next) {
-  const id = Number(req.params.id) || Number(req.newId);
-  if (id !== undefined && id !== "" && Number(id)) {
+  const id = req.params.id || req.newId;
+  if (id !== "undefined" && id !== "" && typeof parseInt(id, 10) === "number") {
     const car = await cardb.get(id);
     if (car) {
       // eslint-disable-next-line require-atomic-updates
@@ -39,7 +39,6 @@ async function validateCar(req, res, next) {
         transmission,
         status
       });
-      console.log([newCar][0][0]);
       // eslint-disable-next-line require-atomic-updates
       req.newId = [newCar][0][0];
       next();
