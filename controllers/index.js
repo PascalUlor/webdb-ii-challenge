@@ -22,6 +22,17 @@ const getCars = async (req, res) => {
   }
 };
 
+const getById = (req, res, statusCode) => {
+  return res.status(200).json({
+    status: statusCode,
+    data: req.carObj
+  });
+};
+
+const getCarById = async (req, res) => {
+  return getById(req, res, 200);
+};
 module.exports = {
-  getCars
+  getCars,
+  getCarById
 };
