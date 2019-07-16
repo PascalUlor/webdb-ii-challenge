@@ -1,6 +1,6 @@
 const db = require("../dbconfig");
 
-const get = id => {
+function get(id) {
   let dataQuery = db("cardb");
 
   if (id) {
@@ -8,8 +8,17 @@ const get = id => {
   }
 
   return dataQuery;
+}
+
+const add = car => {
+  return db("cardb")
+    .insert(car)
+    .then(data => {
+      return data;
+    });
 };
 
 module.exports = {
-  get
+  get,
+  add
 };

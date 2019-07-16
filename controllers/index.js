@@ -32,7 +32,20 @@ const getById = (req, res, statusCode) => {
 const getCarById = async (req, res) => {
   return getById(req, res, 200);
 };
+
+const addCar = async (req, res) => {
+  try {
+    return getById(req, res, 201);
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      error: "There was an error while saving the data to the database"
+    });
+  }
+};
+
 module.exports = {
   getCars,
-  getCarById
+  getCarById,
+  addCar
 };
