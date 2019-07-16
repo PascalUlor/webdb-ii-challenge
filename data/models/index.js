@@ -13,9 +13,7 @@ function get(id) {
 const add = car => {
   return db("cardb")
     .insert(car)
-    .then(data => {
-      return data;
-    });
+    .then(id => get(...id).first());
 };
 
 const update = (id, car) => {
@@ -25,8 +23,15 @@ const update = (id, car) => {
     .then(() => get(id));
 };
 
+const remove = id => {
+  return db("cardb")
+    .where({ id })
+    .del();
+};
+
 module.exports = {
   get,
   add,
-  update
+  update,
+  remove
 };

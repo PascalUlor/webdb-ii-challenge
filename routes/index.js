@@ -17,4 +17,6 @@ router.post(
 
 router.put("/:id", validation.validateCarId, Controllers.updateCarDetail);
 
+router.delete("/:id", validation.validateCarId, Controllers.deleteCar);
+
 module.exports = router;

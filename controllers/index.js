@@ -84,9 +84,26 @@ const updateCarDetail = async (req, res) => {
   }
 };
 
+const deleteCar = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const removeCar = await carQuery.remove(id);
+    return res.status(200).json({
+      status: 200,
+      data: removeCar
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: 500,
+      error: "This car could not be removed"
+    });
+  }
+};
+
 module.exports = {
   getCars,
   getCarById,
   addCar,
-  updateCarDetail
+  updateCarDetail,
+  deleteCar
 };
