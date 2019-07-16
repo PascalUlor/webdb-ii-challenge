@@ -44,8 +44,49 @@ const addCar = async (req, res) => {
   }
 };
 
+const updateCarDetail = async (req, res) => {
+  const id = req.params.id;
+  if (typeof parseInt(id, 10) === "number") {
+    try {
+      const { make, model, vin, mileage, transmission, status } = req.body;
+      if (req.body.make && req.body.model && req.body.mileage && req.body.vin) {
+        if (
+          req.body.make !== "" &&
+          req.body.model !== "" &&
+          req.body.mileage !== "" &&
+          req.body.vin !== ""
+        ) {
+          const carUpdate = await carQuery.update(id, {
+            make,
+            model,
+            vin,
+            mileage,
+            transmission,
+            status
+          });
+          //   console.log("=========", [carUpdate]);
+          return res.status(200).json({
+            status: 200,
+            data: carUpdate
+          });
+        }
+        return res.status(400).json({
+          status: 400,
+          errorMessage: "Please provide car detials."
+        });
+      }
+    } catch (err) {
+      return res.status(400).json({
+        status: 500,
+        error: "The car information could not be modified."
+      });
+    }
+  }
+};
+
 module.exports = {
   getCars,
   getCarById,
-  addCar
+  addCar,
+  updateCarDetail
 };

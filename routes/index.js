@@ -15,4 +15,6 @@ router.post(
   Controllers.addCar
 );
 
+router.put("/:id", validation.validateCarId, Controllers.updateCarDetail);
+
 module.exports = router;

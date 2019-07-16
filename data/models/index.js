@@ -18,7 +18,15 @@ const add = car => {
     });
 };
 
+const update = (id, car) => {
+  return db("cardb")
+    .where({ id })
+    .update(car)
+    .then(() => get(id));
+};
+
 module.exports = {
   get,
-  add
+  add,
+  update
 };
